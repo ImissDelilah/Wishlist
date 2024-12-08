@@ -24,6 +24,9 @@ body {
     border: 2px solid #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h2 {
@@ -62,11 +65,12 @@ p {
 
 .image-item img {
     flex-shrink: 0;
-    width: 300px;
+    max-width: 100%;  /* Ensures image doesn't exceed container size */
     height: auto;
     border-radius: 8px;
     scroll-snap-align: start;
-    transition: transform 0.3s ease;
+    transition: none;  /* Disable any hover scale effect */
+    object-fit: contain;  /* Ensures image fits within container while maintaining aspect ratio */
 }
 
 .scrollable-text {
@@ -78,7 +82,7 @@ p {
 }
 
 .image-item img:hover {
-    transform: scale(1.05);
+    transform: none;  /* Disable image enlargement on hover */
 }
 
 .section:not(:last-child) {
@@ -92,4 +96,4 @@ p {
 .image-gallery::-webkit-scrollbar-thumb {
     background-color: #007bff;
     border-radius: 4px;
-
+}
