@@ -26,6 +26,30 @@ document.addEventListener("DOMContentLoaded", () => {
       container.scrollLeft = originalItemsStart * itemWidth - containerWidth / 2;
     };
 
+    const scrollToDirection = (direction) => {
+      const items = container.querySelectorAll(".scroll-container-item");
+      const itemWidth = items[0].offsetWidth;
+      const totalItems = items.length;
+      const visibleItems = totalItems / 3; // Original + 2 clones
+
+      if (direction === "left") {
+        // Scroll left, remove last item, add a new one at the start
+        container.scrollLeft -= itemWidth;
+        const lastItem = items[items.length - 1];
+        const lastClone = lastItem.cloneNode(true);
+        container.insertBefore(lastClone, container.firstChild);
+        container.removeChild(container.lastChild);
+      } else if (direction === "right") {
+        // Scroll right, remove first item, add a new one at the end
+        container.scrollLeft += itemWidth;
+        const firstItem = items[0];
+        const firstClone = firstItem.cloneNode(true);
+        container.appendChild(firstClone);
+        container.removeChild(container.firstChild);
+      }
+    };
+
+    // Monitor scroll position to detect when to adjust
     const monitorScroll = () => {
       const items = container.querySelectorAll(".scroll-container-item");
       const itemWidth = items[0].offsetWidth;
@@ -62,5 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Monitor scroll for continuity and cleanup
     container.addEventListener("scroll", monitorScroll);
+
+    // Add event listeners for the arrows
+    const leftArrow = container.previousElementSibling.querySelector(".left-arrow");
+    const rightArrow = container.previousElementSibling.querySelector(".right-arrow");
+
+    leftArrow.addEventListener("click", () => scrollToDirection("left"));
+    rightArrow.addEventListener("click", () => scrollToDirection("right"));
   });
 });
