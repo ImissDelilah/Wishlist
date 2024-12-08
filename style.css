@@ -47,7 +47,7 @@ p {
     text-align: center;
 }
 
-.image-gallery {
+.scroll-container {
     display: flex;
     overflow-x: auto;
     gap: 15px;
@@ -56,11 +56,11 @@ p {
     padding-bottom: 20px;
 }
 
-.image-item {
+.scroll-container-item {
     text-align: center;
 }
 
-.image-item img {
+.scroll-container-item img {
     flex-shrink: 0;
     width: 300px;
     height: auto;
@@ -73,10 +73,10 @@ p {
     padding-bottom: 40px;
 }
 
-.image-gallery::-webkit-scrollbar {
+.scroll-container::-webkit-scrollbar {
     height: 8px;
 }
 
-.image-gallery::-webkit-scrollbar-thumb {
+.scroll-container::-webkit-scrollbar-thumb {
     background-color: #007bff;
     border-radius: 4px;
