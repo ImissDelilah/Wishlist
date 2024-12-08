@@ -1,48 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector(".scroll-container");
-  const items = container.querySelectorAll(".scroll-container-item");
+  const scrollContainers = document.querySelectorAll(".scroll-container");
 
-  if (items.length > 0) {
-    let observer;
+  scrollContainers.forEach((container) => {
+    const setupInfiniteScroll = (container) => {
+      const createClones = () => {
+        const items = container.querySelectorAll(".scroll-container-item");
 
-    // Function to duplicate items
-    const duplicateItems = () => {
-      const firstClone = items[0].cloneNode(true);
-      const lastClone = items[items.length - 1].cloneNode(true);
+        // Clone all items once to prepend and append
+        const firstClones = Array.from(items).map((item) => item.cloneNode(true));
+        const lastClones = Array.from(items).map((item) => item.cloneNode(true));
 
-      container.appendChild(firstClone); // Add first clone to the end
-      container.insertBefore(lastClone, container.firstChild); // Add last clone to the beginning
+        // Append clones to the end
+        firstClones.forEach((clone) => container.appendChild(clone));
+
+        // Prepend clones to the start
+        lastClones.reverse().forEach((clone) => container.insertBefore(clone, container.firstChild));
+      };
+
+      const resetScrollPosition = () => {
+        const items = container.querySelectorAll(".scroll-container-item");
+        const itemWidth = items[0].offsetWidth;
+        const containerWidth = container.offsetWidth;
+
+        // Adjust scroll position to the original items
+        const originalItemsStart = items.length / 3; // Skips the first set of prepended clones
+        container.scrollLeft = originalItemsStart * itemWidth - containerWidth / 2;
+      };
+
+      const monitorScroll = () => {
+        const items = container.querySelectorAll(".scroll-container-item");
+        const itemWidth = items[0].offsetWidth;
+        const totalItems = items.length;
+        const visibleItems = totalItems / 3; // Original + 2 clones
+
+        // Reset scroll position dynamically
+        if (container.scrollLeft < visibleItems * itemWidth) {
+          // If scrolled near the start, move to the middle set of items
+          container.scrollLeft += visibleItems * itemWidth;
+        } else if (container.scrollLeft > visibleItems * 2 * itemWidth) {
+          // If scrolled near the end, move back to the middle set of items
+          container.scrollLeft -= visibleItems * itemWidth;
+        }
+      };
+
+      // Create clones and reset position on load
+      createClones();
+      resetScrollPosition();
+
+      // Monitor scroll for continuity
+      container.addEventListener("scroll", monitorScroll);
     };
 
-    // Add clones initially
-    duplicateItems();
-
-    // Observe for continuous duplication
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const { target } = entry;
-
-            if (target === container.firstChild) {
-              // Add a clone to the start when user scrolls back
-              const newLastClone = items[items.length - 1].cloneNode(true);
-              container.insertBefore(newLastClone, container.firstChild);
-            }
-
-            if (target === container.lastChild) {
-              // Add a clone to the end when user scrolls forward
-              const newFirstClone = items[0].cloneNode(true);
-              container.appendChild(newFirstClone);
-            }
-          }
-        });
-      },
-      { root: container, threshold: 0.5 }
-    );
-
-    // Observe the first and last items
-    observer.observe(container.firstChild);
-    observer.observe(container.lastChild);
-  }
+    // Set up infinite scrolling for each container
+    setupInfiniteScroll(container);
+  });
 });
