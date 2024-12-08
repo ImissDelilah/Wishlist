@@ -49,24 +49,19 @@ p {
 
 .scroll-container {
   display: flex;
-  overflow-x: auto; 
-  scroll-snap-type: x mandatory;
-  gap: 1rem;
-  padding: 1rem;
-  scroll-padding: 1rem;
-  transition: scroll-left 0.3s ease; /* Optional: adds smooth scrolling */
+    overflow-x: auto;
+    gap: 15px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 20px;
 }
 .scroll-container-item {
-    flex: 0 0 200px;
-      height: 150px;
-      background-color: #3498db;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      scroll-snap-align: center;
-      border-radius: 10px;
-      text-align: center
+        flex-shrink: 0;
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
 }
 
 
