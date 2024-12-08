@@ -77,10 +77,6 @@ p {
     color: #bbb;
 }
 
-.image-item img:hover {
-    transform: scale(1.05);
-}
-
 .section:not(:last-child) {
     padding-bottom: 40px;
 }
