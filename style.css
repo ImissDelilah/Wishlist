@@ -56,14 +56,17 @@ p {
     padding-bottom: 20px;
 }
 .scroll-container-item {
-        flex-shrink: 0;
+    text-align: center;
+}
+
+.scroll-container-item img {
+    flex-shrink: 0;
     width: 300px;
     height: auto;
     border-radius: 8px;
     scroll-snap-align: start;
     transition: transform 0.3s ease;
 }
-
 
 .section:not(:last-child) {
     padding-bottom: 40px;
