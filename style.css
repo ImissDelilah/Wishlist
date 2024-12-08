@@ -72,10 +72,3 @@ p {
     padding-bottom: 40px;
 }
 
-.scroll-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.scroll-container::-webkit-scrollbar-thumb {
-    background-color: #007bff;
-    border-radius: 4px;
