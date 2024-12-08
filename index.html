@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <script src="script.js">
+        document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".scroll-container");
+  const items = container.querySelectorAll(".scroll-container-item");
+
+  if (items.length > 0) {
+    // Clone the first and last items
+    const firstClone = items[0].cloneNode(true);
+    const lastClone = items[items.length - 1].cloneNode(true);
+
+    // Add them to the container
+    container.insertBefore(lastClone, items[0]); // Add the last item clone to the beginning
+    container.appendChild(firstClone); // Add the first item clone to the end
+  }
+});
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-<script src="script.js">
     <div class="container">
         <!-- Section -->
         <section class="section">
@@ -51,8 +68,7 @@
             <p>this drum kit I looked into them and this one has a good dm with good sounds. and comes with 90 days of drumeo</p>
         </section>
     </div>
-
-</script src="script.js">        
+     
 </body>
 </html>
 
