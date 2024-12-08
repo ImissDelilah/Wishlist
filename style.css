@@ -52,25 +52,26 @@ p {
 
 .image-gallery {
     display: flex;
-    overflow-x: auto;
+    overflow-x: auto; /* Enable horizontal scrolling */
     gap: 15px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory; /* Keep images snapping to the scroll position */
+    scroll-behavior: smooth; /* Smooth scrolling */
     padding-bottom: 20px;
 }
 
 .image-item {
     text-align: center;
+    position: relative; /* Stabilize image layout */
 }
 
 .image-item img {
     flex-shrink: 0;
-    width: 300px; /* Retain the fixed width */
-    height: auto;
+    width: 300px; /* Fixed width for consistency */
+    height: auto; /* Maintain aspect ratio */
     border-radius: 8px;
-    scroll-snap-align: start;
-    transition: none; /* Removed any transition effect */
-    /* Removed scale effect */
+    scroll-snap-align: start; /* Snap alignment for smooth scrolling */
+    transition: none; /* Ensure no transition effects */
+    pointer-events: auto; /* Allow interaction without affecting layout */
 }
 
 .scrollable-text {
@@ -81,7 +82,7 @@ p {
     color: #bbb;
 }
 
-/* Removed the hover scaling effect */
+/* Removed scaling or hover effects */
 .image-item img:hover {
     transform: none;
 }
