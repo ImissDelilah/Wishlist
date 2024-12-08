@@ -47,6 +47,10 @@ p {
     text-align: center;
 }
 
+lu {
+text-align: center;
+}
+
 .scroll-container {
   display: flex;
     overflow-x: auto;
