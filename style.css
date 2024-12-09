@@ -59,16 +59,14 @@ text-align: center;
     scroll-behavior: smooth;
     padding-bottom: 20px;
 }
-.scroll-container-item {
-    text-align: center;
-}
+
 
 .scroll-container-item img {
     flex-shrink: 0;
     width: 300px;
     height: auto;
     border-radius: 8px;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     transition: transform 0.3s ease;
 }
 
